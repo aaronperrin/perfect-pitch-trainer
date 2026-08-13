@@ -9,20 +9,30 @@
 <style>
 :root{color-scheme:light dark;--bg:#f6f7fb;--panel:#fff;--text:#171923;--muted:#667085;--line:#d8dce5;--accent:#2859d7;--accentText:#fff;--good:#147a45;--bad:#b42318}
 @media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#191c22;--text:#f3f4f6;--muted:#a0a7b4;--line:#343944;--accent:#7398ff;--accentText:#10131a;--good:#69d39a;--bad:#ff8b83}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}main{max-width:780px;margin:0 auto;padding:20px 16px 42px}h1{font-size:1.6rem;margin:0 0 5px}h2{font-size:1rem;margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:.9rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.stat .v{font-size:1.45rem;font-weight:750;margin-top:3px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:.9rem;color:var(--muted)}select,button,input{font:inherit}select{width:100%;min-height:46px;margin-top:5px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:9px 11px}button{min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:10px 12px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button.primary{background:var(--accent);color:var(--accentText);border-color:var(--accent);font-weight:700}button:disabled{opacity:.38}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.display{text-align:center;border:1px solid var(--line);border-radius:15px;padding:22px 12px;margin:16px 0}.pitch{font-size:2.6rem;font-weight:800;line-height:1}.feedback{min-height:1.5em;margin-top:10px}.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.note{font-weight:700}.switch{display:flex;align-items:center;gap:10px;color:var(--text);margin:11px 0}.switch input{width:22px;height:22px}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.82rem}.mastery{display:grid;gap:8px}.mrow{display:grid;grid-template-columns:38px 1fr 52px;align-items:center;gap:10px}.track{height:10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);overflow:hidden}.bar{height:100%;background:var(--accent);border-radius:999px}.callout{border-left:4px solid var(--accent);padding:10px 12px;background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:9px}.diag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;word-break:break-word}.good{color:var(--good)}.bad{color:var(--bad)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}main{max-width:780px;margin:0 auto;padding:20px 16px 42px}h1{font-size:1.6rem;margin:0 0 5px}h2{font-size:1rem;margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:.9rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.stat .v{font-size:1.45rem;font-weight:750;margin-top:3px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:.9rem;color:var(--muted)}select,button,input{font:inherit}select{width:100%;min-height:46px;margin-top:5px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:9px 11px}button{min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:10px 12px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button.primary{background:var(--accent);color:var(--accentText);border-color:var(--accent);font-weight:700}button:disabled{opacity:.38}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.display{text-align:center;border:1px solid var(--line);border-radius:15px;padding:22px 12px;margin:16px 0}.pitch{font-size:2.6rem;font-weight:800;line-height:1}.feedback{min-height:1.5em;margin-top:10px}.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.note{font-weight:700}.switch{display:flex;align-items:center;gap:10px;color:var(--text);margin:11px 0}.switch input{width:22px;height:22px}.mastery{display:grid;gap:8px}.mrow{display:grid;grid-template-columns:38px 1fr 52px;align-items:center;gap:10px}.track{height:10px;border-radius:999px;background:#d8dce5;overflow:hidden}.bar{height:100%;background:var(--accent);border-radius:999px}.callout{border-left:4px solid var(--accent);padding:10px 12px;background:var(--panel);border-radius:9px}.diag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;word-break:break-word}.good{color:var(--good)}.bad{color:var(--bad)}audio{width:100%;margin-top:10px}
 @media(max-width:580px){.stats{grid-template-columns:1fr 1fr}.row,.controls{grid-template-columns:1fr}.notes{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
 <main>
   <h1>Perfect Pitch Trainer</h1>
-  <p class="muted small" style="margin-top:0">Pitch-label training with retrieval practice, octave/timbre transfer, and no-feedback assessment.</p>
+  <p class="muted small" style="margin-top:0">Safari-safe pitch-label training. Audio is rendered as native WAV media; Web Audio is not used.</p>
 
   <section class="stats" aria-label="session summary">
     <div class="stat"><div class="small muted">Accuracy</div><div class="v" id="acc">—</div></div>
     <div class="stat"><div class="small muted">Streak</div><div class="v" id="streak">0</div></div>
     <div class="stat"><div class="small muted">Trials</div><div class="v" id="trials">0</div></div>
-    <div class="stat"><div class="small muted">Audio</div><div class="v" id="audioState" style="font-size:1rem">Tap play</div></div>
+    <div class="stat"><div class="small muted">Audio</div><div class="v" id="audioState" style="font-size:1rem">Ready</div></div>
+  </section>
+
+  <section class="card">
+    <h2>Safari audio check</h2>
+    <div class="controls">
+      <button id="testTone" class="primary" type="button">▶ Test A4 (440 Hz)</button>
+      <button id="replayNative" type="button" disabled>Replay current audio</button>
+    </div>
+    <audio id="player" controls playsinline preload="metadata"></audio>
+    <p id="audioHelp" class="small muted">Tap “Test A4.” If Safari blocks automatic playback, the tone will still be loaded into the native audio control above; tap its ▶ button.</p>
   </section>
 
   <section class="card">
@@ -84,89 +94,233 @@
   <section class="card">
     <h2>Interpretation</h2>
     <p id="interpretation" class="small">No trials yet. This is perceptual-learning practice, not a diagnostic test of innate absolute pitch.</p>
-    <p class="small muted">Study-inspired logic: restricted pitch sets and corrective feedback support acquisition; retrieval strengthens sound–label mapping; octave and timbre variation probe generalization; no-feedback trials give a cleaner assessment. Improvement on trained stimuli is not automatically equivalent to broad, durable absolute pitch.</p>
+    <p class="small muted">Protocol logic: restricted pitch sets and corrective feedback support acquisition; retrieval strengthens sound–label mapping; octave/timbre variation probes generalization; no-feedback trials provide cleaner assessment.</p>
   </section>
 
   <section class="card">
     <details>
       <summary>Safari audio diagnostics</summary>
-      <p class="small muted">This hosted version creates and starts the oscillator directly inside the button tap handler—there is no async step before playback.</p>
+      <p class="small muted">This build does not use AudioContext. Each tap synchronously generates a PCM WAV, assigns it to a native HTML5 audio element, and calls play() in the same tap handler.</p>
       <div id="diag" class="diag muted">No playback attempt yet.</div>
     </details>
   </section>
 </main>
+
 <script>
 (function(){
 'use strict';
-const NOTES=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
-const SETS={3:[0,4,9],6:[0,2,4,5,7,9],12:[0,1,2,3,4,5,6,7,8,9,10,11]};
-const $=id=>document.getElementById(id);
-let ctx=null,current=null,answered=true,total=0,correct=0,run=0;
-let stats=NOTES.map(()=>({n:0,c:0,recent:[]}));
-function log(s){$('diag').textContent=new Date().toLocaleTimeString()+' — '+s}
-function audioContext(){
-  if(!ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C){$('audioState').textContent='Unsupported';throw new Error('Web Audio unavailable')}ctx=new C()}
-  if(ctx.state==='suspended'){try{ctx.resume()}catch(e){log('resume error: '+e.message)}}
-  $('audioState').textContent=ctx.state==='running'?'Ready':'Starting';
-  return ctx;
+var NOTES=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+var SETS={3:[0,4,9],6:[0,2,4,5,7,9],12:[0,1,2,3,4,5,6,7,8,9,10,11]};
+function $(id){return document.getElementById(id);}
+var player=$('player');
+var current=null,answered=true,total=0,correct=0,run=0,currentSrc='';
+var stats=NOTES.map(function(){return {n:0,c:0,recent:[]};});
+
+function log(s){$('diag').textContent=new Date().toLocaleTimeString()+' — '+s;}
+function hz(note,oct){var midi=12*(oct+1)+note;return 440*Math.pow(2,(midi-69)/12);}
+function writeAscii(view,offset,text){for(var i=0;i<text.length;i++)view.setUint8(offset+i,text.charCodeAt(i));}
+function bytesToBase64(bytes){
+  var chunk=0x8000,parts=[];
+  for(var i=0;i<bytes.length;i+=chunk){
+    var sub=bytes.subarray(i,Math.min(i+chunk,bytes.length));
+    parts.push(String.fromCharCode.apply(null,sub));
+  }
+  return btoa(parts.join(''));
 }
-function hz(note,oct){const midi=12*(oct+1)+note;return 440*Math.pow(2,(midi-69)/12)}
-function play(trial){
-  if(!trial)return;
+function sampleWave(phase,timbre){
+  if(timbre==='triangle') return (2/Math.PI)*Math.asin(Math.sin(phase));
+  if(timbre==='harmonic') return (Math.sin(phase)+0.24*Math.sin(2*phase)+0.10*Math.sin(3*phase))/1.34;
+  return Math.sin(phase);
+}
+function makeWavDataUrl(freq,timbre,duration){
+  var sr=22050;
+  var n=Math.max(1,Math.floor(sr*duration));
+  var buffer=new ArrayBuffer(44+n*2);
+  var view=new DataView(buffer);
+  writeAscii(view,0,'RIFF');
+  view.setUint32(4,36+n*2,true);
+  writeAscii(view,8,'WAVE');
+  writeAscii(view,12,'fmt ');
+  view.setUint32(16,16,true);
+  view.setUint16(20,1,true);
+  view.setUint16(22,1,true);
+  view.setUint32(24,sr,true);
+  view.setUint32(28,sr*2,true);
+  view.setUint16(32,2,true);
+  view.setUint16(34,16,true);
+  writeAscii(view,36,'data');
+  view.setUint32(40,n*2,true);
+  var fade=Math.max(1,Math.floor(sr*0.025));
+  for(var i=0;i<n;i++){
+    var t=i/sr;
+    var env=1;
+    if(i<fade) env=i/fade;
+    else if(i>n-fade) env=Math.max(0,(n-i)/fade);
+    var y=sampleWave(2*Math.PI*freq*t,timbre)*env*0.55;
+    y=Math.max(-1,Math.min(1,y));
+    view.setInt16(44+i*2,Math.round(y*32767),true);
+  }
+  return 'data:audio/wav;base64,'+bytesToBase64(new Uint8Array(buffer));
+}
+function playSource(src,label){
   try{
-    const ac=audioContext();
-    const now=ac.currentTime;
-    const dur=Number($('duration').value);
-    const gain=ac.createGain();
-    gain.gain.setValueAtTime(.0001,now);
-    gain.gain.exponentialRampToValueAtTime(.18,now+.025);
-    gain.gain.setValueAtTime(.18,now+Math.max(.04,dur-.07));
-    gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
-    gain.connect(ac.destination);
-    const f=hz(trial.note,trial.octave);
-    if(trial.timbre==='harmonic'){
-      [[1,1],[2,.24],[3,.1]].forEach(p=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(f*p[0],now);g.gain.value=p[1];o.connect(g);g.connect(gain);o.start(now);o.stop(now+dur+.04)});
+    currentSrc=src;
+    player.pause();
+    player.muted=false;
+    player.volume=1;
+    player.src=src;
+    player.currentTime=0;
+    player.load();
+    $('replayNative').disabled=false;
+    $('audioState').textContent='Loading';
+    log('Loaded native WAV: '+label);
+    var p=player.play();
+    if(p&&typeof p.then==='function'){
+      p.then(function(){
+        $('audioState').textContent='Playing';
+        $('audioHelp').textContent='Audio playback started successfully.';
+        log('Native HTMLMediaElement playback started: '+label);
+      }).catch(function(err){
+        $('audioState').textContent='Tap native ▶';
+        $('audioHelp').textContent='Safari blocked programmatic playback. Tap ▶ in the native audio control; the tone is already loaded.';
+        log('play() rejected: '+(err&&err.name?err.name+': '+err.message:String(err)));
+      });
     }else{
-      const o=ac.createOscillator();o.type=trial.timbre;o.frequency.setValueAtTime(f,now);o.connect(gain);o.start(now);o.stop(now+dur+.04);
+      $('audioState').textContent='Playing';
     }
-    $('audioState').textContent='Playing';
-    log('Started '+NOTES[trial.note]+trial.octave+' '+trial.timbre+' at '+f.toFixed(2)+' Hz; context='+ac.state);
-    setTimeout(()=>{if(ctx)$('audioState').textContent=ctx.state==='running'?'Ready':ctx.state},Math.round(dur*1000+80));
-  }catch(e){$('audioState').textContent='Error';$('feedback').textContent='Audio error: '+e.message;log(e.name+': '+e.message)}
+  }catch(e){
+    $('audioState').textContent='Error';
+    $('audioHelp').textContent='Audio error: '+e.message;
+    log((e.name||'Error')+': '+e.message);
+  }
 }
-function active(){return SETS[Number($('setSize').value)]}
-function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function renderAndPlay(trial){
+  if(!trial)return;
+  var f=hz(trial.note,trial.octave);
+  var dur=Number($('duration').value);
+  var src=makeWavDataUrl(f,trial.timbre,dur);
+  playSource(src,NOTES[trial.note]+trial.octave+' '+trial.timbre+' '+f.toFixed(2)+' Hz');
+}
+function testA4(){
+  var src=makeWavDataUrl(440,'sine',0.8);
+  playSource(src,'A4 sine 440 Hz');
+}
+function active(){return SETS[Number($('setSize').value)];}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
 function weightedNote(){
-  const a=active();if(!$('adaptive').checked||total<2)return pick(a);
-  const w=a.map(i=>stats[i].n?0.7+2.4*(1-stats[i].c/stats[i].n):2.2);let r=Math.random()*w.reduce((x,y)=>x+y,0);
-  for(let k=0;k<a.length;k++){r-=w[k];if(r<=0)return a[k]}return a[a.length-1]
+  var a=active();
+  if(!$('adaptive').checked||total<2)return pick(a);
+  var w=a.map(function(i){return stats[i].n?0.7+2.4*(1-stats[i].c/stats[i].n):2.2;});
+  var sum=w.reduce(function(x,y){return x+y;},0);
+  var r=Math.random()*sum;
+  for(var k=0;k<a.length;k++){r-=w[k];if(r<=0)return a[k];}
+  return a[a.length-1];
 }
 function newTrial(){
-  const transfer=$('mode').value==='transfer';
-  const note=weightedNote();
-  current={note,octave:(transfer||$('octave').checked)?pick([3,4,5]):4,timbre:(transfer||$('timbre').checked)?pick(['sine','triangle','harmonic']):'sine'};
-  answered=false;$('feedback').textContent='Listen, then choose the pitch class.';$('prompt').textContent=$('mode').value==='guided'?'Associate this label with the sound':'Identify the pitch class';$('pitch').textContent=$('mode').value==='guided'?NOTES[note]:'?';$('replay').disabled=false;updateButtons();
-  play(current);
+  var transfer=$('mode').value==='transfer';
+  var note=weightedNote();
+  current={
+    note:note,
+    octave:(transfer||$('octave').checked)?pick([3,4,5]):4,
+    timbre:(transfer||$('timbre').checked)?pick(['sine','triangle','harmonic']):'sine'
+  };
+  answered=false;
+  $('feedback').className='feedback small muted';
+  $('feedback').textContent='Listen, then choose the pitch class.';
+  $('prompt').textContent=$('mode').value==='guided'?'Associate this label with the sound':'Identify the pitch class';
+  $('pitch').textContent=$('mode').value==='guided'?NOTES[note]:'?';
+  $('replay').disabled=false;
+  updateButtons();
+  renderAndPlay(current);
 }
 function answer(n){
-  if(!current||answered)return;answered=true;total++;const ok=n===current.note;if(ok){correct++;run++}else run=0;
-  const s=stats[current.note];s.n++;if(ok)s.c++;s.recent.push(ok?1:0);if(s.recent.length>8)s.recent.shift();
-  if($('mode').value==='test'){$('pitch').textContent='Recorded';$('feedback').textContent='Response recorded; correctness hidden.'}
-  else{$('pitch').textContent=NOTES[current.note];$('feedback').textContent=ok?'Correct — '+NOTES[current.note]+'.':'You chose '+NOTES[n]+'; it was '+NOTES[current.note]+'.';$('feedback').className='feedback small '+(ok?'good':'bad')}
+  if(!current||answered)return;
+  answered=true;total++;
+  var ok=n===current.note;
+  if(ok){correct++;run++;}else{run=0;}
+  var s=stats[current.note];
+  s.n++;if(ok)s.c++;
+  s.recent.push(ok?1:0);
+  if(s.recent.length>8)s.recent.shift();
+  if($('mode').value==='test'){
+    $('pitch').textContent='Recorded';
+    $('feedback').className='feedback small muted';
+    $('feedback').textContent='Response recorded; correctness hidden.';
+  }else{
+    $('pitch').textContent=NOTES[current.note];
+    $('feedback').className='feedback small '+(ok?'good':'bad');
+    $('feedback').textContent=ok?'Correct — '+NOTES[current.note]+'.':'You chose '+NOTES[n]+'; it was '+NOTES[current.note]+'.';
+  }
   updateButtons();updateStats();updateMastery();updateInterpretation();
 }
-function updateButtons(){const a=active();[...$('noteButtons').children].forEach((b,i)=>{b.disabled=answered||!a.includes(i);b.style.opacity=a.includes(i)?'1':'.32'})}
-function updateStats(){$('acc').textContent=total?Math.round(100*correct/total)+'%':'—';$('streak').textContent=run;$('trials').textContent=total}
-function updateMastery(){const m=$('mastery');m.innerHTML='';active().forEach(i=>{const s=stats[i],r=s.recent.length?s.recent.reduce((a,b)=>a+b,0)/s.recent.length:0;const row=document.createElement('div');row.className='mrow';row.innerHTML='<strong>'+NOTES[i]+'</strong><div class="track"><div class="bar" style="width:'+Math.round(r*100)+'%"></div></div><span class="small">'+(s.n?Math.round(r*100)+'%':'new')+'</span>';m.appendChild(row)})}
-function updateInterpretation(){if(!total)return;const a=correct/total;$('interpretation').textContent=total<12?'Early-session estimate only. Accumulate more trials before interpreting accuracy.':a>=.85?'Strong identification in this session. Next, use transfer mode and then no-feedback assessment.':a>=.65?'A developing sound–label mapping is visible. Keep the set stable until errors concentrate in only a few pitch classes, then broaden the set.':'The current set is still difficult. Reduce the pitch set and use immediate feedback before adding more variation.'}
-function protocol(){const t={guided:'Guided association: the pitch label stays visible while you hear it, emphasizing the initial sound–label link.',retrieval:'Randomized retrieval: identify each pitch before immediate corrective feedback. Difficult pitch classes can recur more often.',transfer:'Transfer: octave and timbre vary automatically to test whether learning generalizes beyond an exact training stimulus.',test:'Assessment: responses are recorded without trial-by-trial correctness feedback.'};$('protocolNote').textContent=t[$('mode').value];if($('mode').value==='transfer'){$('octave').checked=true;$('timbre').checked=true}}
-NOTES.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.className='note';b.textContent=n;b.addEventListener('click',()=>answer(i));$('noteButtons').appendChild(b)});
+function updateButtons(){
+  var a=active();
+  Array.prototype.forEach.call($('noteButtons').children,function(b,i){
+    b.disabled=answered||a.indexOf(i)===-1;
+    b.style.opacity=a.indexOf(i)===-1?'.32':'1';
+  });
+}
+function updateStats(){
+  $('acc').textContent=total?Math.round(100*correct/total)+'%':'—';
+  $('streak').textContent=run;
+  $('trials').textContent=total;
+}
+function updateMastery(){
+  var m=$('mastery');m.innerHTML='';
+  active().forEach(function(i){
+    var s=stats[i],r=s.recent.length?s.recent.reduce(function(a,b){return a+b;},0)/s.recent.length:0;
+    var row=document.createElement('div');row.className='mrow';
+    row.innerHTML='<strong>'+NOTES[i]+'</strong><div class="track"><div class="bar" style="width:'+Math.round(r*100)+'%"></div></div><span class="small">'+(s.n?Math.round(r*100)+'%':'new')+'</span>';
+    m.appendChild(row);
+  });
+}
+function updateInterpretation(){
+  if(!total)return;
+  var a=correct/total;
+  $('interpretation').textContent=total<12
+    ?'Early-session estimate only. Accumulate more trials before interpreting accuracy.'
+    :a>=.85
+      ?'Strong identification in this session. Next, use transfer mode and then no-feedback assessment.'
+      :a>=.65
+        ?'A developing sound–label mapping is visible. Keep the set stable until errors concentrate in only a few pitch classes, then broaden the set.'
+        :'The current set is still difficult. Reduce the pitch set and use immediate feedback before adding more variation.';
+}
+function protocol(){
+  var t={
+    guided:'Guided association: the pitch label stays visible while you hear it, emphasizing the initial sound–label link.',
+    retrieval:'Randomized retrieval: identify each pitch before immediate corrective feedback. Difficult pitch classes can recur more often.',
+    transfer:'Transfer: octave and timbre vary automatically to test whether learning generalizes beyond an exact training stimulus.',
+    test:'Assessment: responses are recorded without trial-by-trial correctness feedback.'
+  };
+  $('protocolNote').textContent=t[$('mode').value];
+  if($('mode').value==='transfer'){$('octave').checked=true;$('timbre').checked=true;}
+}
+NOTES.forEach(function(n,i){
+  var b=document.createElement('button');
+  b.type='button';b.className='note';b.textContent=n;
+  b.addEventListener('click',function(){answer(i);});
+  $('noteButtons').appendChild(b);
+});
+$('testTone').addEventListener('click',testA4);
 $('newTone').addEventListener('click',newTrial);
-$('replay').addEventListener('click',()=>play(current));
+$('replay').addEventListener('click',function(){renderAndPlay(current);});
+$('replayNative').addEventListener('click',function(){if(currentSrc)playSource(currentSrc,'current cached WAV');});
 $('mode').addEventListener('change',protocol);
-$('setSize').addEventListener('change',()=>{current=null;answered=true;$('pitch').textContent='?';$('feedback').className='feedback small muted';$('feedback').textContent='Set changed. Tap Play new tone.';$('replay').disabled=true;updateButtons();updateMastery()});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&ctx&&ctx.state==='suspended'){$('audioState').textContent='Tap play';log('Safari suspended audio while page was inactive. Next direct tap will resume it.')}});
-protocol();updateButtons();updateStats();updateMastery();
+$('setSize').addEventListener('change',function(){
+  current=null;answered=true;$('pitch').textContent='?';
+  $('feedback').className='feedback small muted';
+  $('feedback').textContent='Training set changed. Tap “Play new tone”.';
+  $('replay').disabled=true;updateButtons();updateMastery();
+});
+player.addEventListener('playing',function(){$('audioState').textContent='Playing';});
+player.addEventListener('ended',function(){$('audioState').textContent='Ready';});
+player.addEventListener('error',function(){
+  var code=player.error?player.error.code:'unknown';
+  $('audioState').textContent='Media error';
+  $('audioHelp').textContent='Safari media error '+code+'. Open diagnostics below.';
+  log('HTMLMediaElement error code '+code);
+});
+protocol();updateStats();updateMastery();updateButtons();
 })();
 </script>
 </body>
