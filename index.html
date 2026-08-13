@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#111827">
+<title>Perfect Pitch Trainer</title>
+<style>
+:root{color-scheme:light dark;--bg:#f6f7fb;--panel:#fff;--text:#171923;--muted:#667085;--line:#d8dce5;--accent:#2859d7;--accentText:#fff;--good:#147a45;--bad:#b42318}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#191c22;--text:#f3f4f6;--muted:#a0a7b4;--line:#343944;--accent:#7398ff;--accentText:#10131a;--good:#69d39a;--bad:#ff8b83}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}main{max-width:780px;margin:0 auto;padding:20px 16px 42px}h1{font-size:1.6rem;margin:0 0 5px}h2{font-size:1rem;margin:0 0 12px}.muted{color:var(--muted)}.small{font-size:.9rem}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.stat .v{font-size:1.45rem;font-weight:750;margin-top:3px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:.9rem;color:var(--muted)}select,button,input{font:inherit}select{width:100%;min-height:46px;margin-top:5px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:9px 11px}button{min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);padding:10px 12px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button.primary{background:var(--accent);color:var(--accentText);border-color:var(--accent);font-weight:700}button:disabled{opacity:.38}.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}.display{text-align:center;border:1px solid var(--line);border-radius:15px;padding:22px 12px;margin:16px 0}.pitch{font-size:2.6rem;font-weight:800;line-height:1}.feedback{min-height:1.5em;margin-top:10px}.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.note{font-weight:700}.switch{display:flex;align-items:center;gap:10px;color:var(--text);margin:11px 0}.switch input{width:22px;height:22px}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:.82rem}.mastery{display:grid;gap:8px}.mrow{display:grid;grid-template-columns:38px 1fr 52px;align-items:center;gap:10px}.track{height:10px;border-radius:999px;background:color-mix(in srgb,var(--accent) 12%,transparent);overflow:hidden}.bar{height:100%;background:var(--accent);border-radius:999px}.callout{border-left:4px solid var(--accent);padding:10px 12px;background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:9px}.diag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;word-break:break-word}.good{color:var(--good)}.bad{color:var(--bad)}
+@media(max-width:580px){.stats{grid-template-columns:1fr 1fr}.row,.controls{grid-template-columns:1fr}.notes{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Perfect Pitch Trainer</h1>
+  <p class="muted small" style="margin-top:0">Pitch-label training with retrieval practice, octave/timbre transfer, and no-feedback assessment.</p>
+
+  <section class="stats" aria-label="session summary">
+    <div class="stat"><div class="small muted">Accuracy</div><div class="v" id="acc">—</div></div>
+    <div class="stat"><div class="small muted">Streak</div><div class="v" id="streak">0</div></div>
+    <div class="stat"><div class="small muted">Trials</div><div class="v" id="trials">0</div></div>
+    <div class="stat"><div class="small muted">Audio</div><div class="v" id="audioState" style="font-size:1rem">Tap play</div></div>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <label>Protocol
+        <select id="mode">
+          <option value="guided">Guided association</option>
+          <option value="retrieval" selected>Randomized retrieval</option>
+          <option value="transfer">Octave + timbre transfer</option>
+          <option value="test">No-feedback assessment</option>
+        </select>
+      </label>
+      <label>Training set
+        <select id="setSize">
+          <option value="3">3 pitch classes</option>
+          <option value="6" selected>6 pitch classes</option>
+          <option value="12">12 pitch classes</option>
+        </select>
+      </label>
+    </div>
+    <div id="protocolNote" class="callout small" style="margin-top:14px"></div>
+  </section>
+
+  <section class="card">
+    <div class="display">
+      <div class="small muted" id="prompt">Identify the pitch class</div>
+      <div class="pitch" id="pitch">?</div>
+      <div class="feedback small muted" id="feedback" aria-live="polite">Tap “Play new tone” to begin.</div>
+    </div>
+
+    <div class="controls" style="margin-bottom:14px">
+      <button id="newTone" class="primary" type="button">▶ Play new tone</button>
+      <button id="replay" type="button" disabled>Replay tone</button>
+    </div>
+
+    <div class="small" style="margin-bottom:8px">Your answer</div>
+    <div class="notes" id="noteButtons"></div>
+  </section>
+
+  <section class="card">
+    <h2>Generalization controls</h2>
+    <label class="switch"><input id="octave" type="checkbox" checked> Randomize octave (3–5)</label>
+    <label class="switch"><input id="timbre" type="checkbox"> Randomize timbre</label>
+    <label class="switch"><input id="adaptive" type="checkbox" checked> Repeat difficult pitch classes more often</label>
+    <label>Tone duration
+      <select id="duration">
+        <option value="0.45">0.45 s</option>
+        <option value="0.8" selected>0.8 s</option>
+        <option value="1.2">1.2 s</option>
+      </select>
+    </label>
+  </section>
+
+  <section class="card">
+    <h2>Pitch-class mastery</h2>
+    <div id="mastery" class="mastery"></div>
+  </section>
+
+  <section class="card">
+    <h2>Interpretation</h2>
+    <p id="interpretation" class="small">No trials yet. This is perceptual-learning practice, not a diagnostic test of innate absolute pitch.</p>
+    <p class="small muted">Study-inspired logic: restricted pitch sets and corrective feedback support acquisition; retrieval strengthens sound–label mapping; octave and timbre variation probe generalization; no-feedback trials give a cleaner assessment. Improvement on trained stimuli is not automatically equivalent to broad, durable absolute pitch.</p>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary>Safari audio diagnostics</summary>
+      <p class="small muted">This hosted version creates and starts the oscillator directly inside the button tap handler—there is no async step before playback.</p>
+      <div id="diag" class="diag muted">No playback attempt yet.</div>
+    </details>
+  </section>
+</main>
+<script>
+(function(){
+'use strict';
+const NOTES=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const SETS={3:[0,4,9],6:[0,2,4,5,7,9],12:[0,1,2,3,4,5,6,7,8,9,10,11]};
+const $=id=>document.getElementById(id);
+let ctx=null,current=null,answered=true,total=0,correct=0,run=0;
+let stats=NOTES.map(()=>({n:0,c:0,recent:[]}));
+function log(s){$('diag').textContent=new Date().toLocaleTimeString()+' — '+s}
+function audioContext(){
+  if(!ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C){$('audioState').textContent='Unsupported';throw new Error('Web Audio unavailable')}ctx=new C()}
+  if(ctx.state==='suspended'){try{ctx.resume()}catch(e){log('resume error: '+e.message)}}
+  $('audioState').textContent=ctx.state==='running'?'Ready':'Starting';
+  return ctx;
+}
+function hz(note,oct){const midi=12*(oct+1)+note;return 440*Math.pow(2,(midi-69)/12)}
+function play(trial){
+  if(!trial)return;
+  try{
+    const ac=audioContext();
+    const now=ac.currentTime;
+    const dur=Number($('duration').value);
+    const gain=ac.createGain();
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(.18,now+.025);
+    gain.gain.setValueAtTime(.18,now+Math.max(.04,dur-.07));
+    gain.gain.exponentialRampToValueAtTime(.0001,now+dur);
+    gain.connect(ac.destination);
+    const f=hz(trial.note,trial.octave);
+    if(trial.timbre==='harmonic'){
+      [[1,1],[2,.24],[3,.1]].forEach(p=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(f*p[0],now);g.gain.value=p[1];o.connect(g);g.connect(gain);o.start(now);o.stop(now+dur+.04)});
+    }else{
+      const o=ac.createOscillator();o.type=trial.timbre;o.frequency.setValueAtTime(f,now);o.connect(gain);o.start(now);o.stop(now+dur+.04);
+    }
+    $('audioState').textContent='Playing';
+    log('Started '+NOTES[trial.note]+trial.octave+' '+trial.timbre+' at '+f.toFixed(2)+' Hz; context='+ac.state);
+    setTimeout(()=>{if(ctx)$('audioState').textContent=ctx.state==='running'?'Ready':ctx.state},Math.round(dur*1000+80));
+  }catch(e){$('audioState').textContent='Error';$('feedback').textContent='Audio error: '+e.message;log(e.name+': '+e.message)}
+}
+function active(){return SETS[Number($('setSize').value)]}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function weightedNote(){
+  const a=active();if(!$('adaptive').checked||total<2)return pick(a);
+  const w=a.map(i=>stats[i].n?0.7+2.4*(1-stats[i].c/stats[i].n):2.2);let r=Math.random()*w.reduce((x,y)=>x+y,0);
+  for(let k=0;k<a.length;k++){r-=w[k];if(r<=0)return a[k]}return a[a.length-1]
+}
+function newTrial(){
+  const transfer=$('mode').value==='transfer';
+  const note=weightedNote();
+  current={note,octave:(transfer||$('octave').checked)?pick([3,4,5]):4,timbre:(transfer||$('timbre').checked)?pick(['sine','triangle','harmonic']):'sine'};
+  answered=false;$('feedback').textContent='Listen, then choose the pitch class.';$('prompt').textContent=$('mode').value==='guided'?'Associate this label with the sound':'Identify the pitch class';$('pitch').textContent=$('mode').value==='guided'?NOTES[note]:'?';$('replay').disabled=false;updateButtons();
+  play(current);
+}
+function answer(n){
+  if(!current||answered)return;answered=true;total++;const ok=n===current.note;if(ok){correct++;run++}else run=0;
+  const s=stats[current.note];s.n++;if(ok)s.c++;s.recent.push(ok?1:0);if(s.recent.length>8)s.recent.shift();
+  if($('mode').value==='test'){$('pitch').textContent='Recorded';$('feedback').textContent='Response recorded; correctness hidden.'}
+  else{$('pitch').textContent=NOTES[current.note];$('feedback').textContent=ok?'Correct — '+NOTES[current.note]+'.':'You chose '+NOTES[n]+'; it was '+NOTES[current.note]+'.';$('feedback').className='feedback small '+(ok?'good':'bad')}
+  updateButtons();updateStats();updateMastery();updateInterpretation();
+}
+function updateButtons(){const a=active();[...$('noteButtons').children].forEach((b,i)=>{b.disabled=answered||!a.includes(i);b.style.opacity=a.includes(i)?'1':'.32'})}
+function updateStats(){$('acc').textContent=total?Math.round(100*correct/total)+'%':'—';$('streak').textContent=run;$('trials').textContent=total}
+function updateMastery(){const m=$('mastery');m.innerHTML='';active().forEach(i=>{const s=stats[i],r=s.recent.length?s.recent.reduce((a,b)=>a+b,0)/s.recent.length:0;const row=document.createElement('div');row.className='mrow';row.innerHTML='<strong>'+NOTES[i]+'</strong><div class="track"><div class="bar" style="width:'+Math.round(r*100)+'%"></div></div><span class="small">'+(s.n?Math.round(r*100)+'%':'new')+'</span>';m.appendChild(row)})}
+function updateInterpretation(){if(!total)return;const a=correct/total;$('interpretation').textContent=total<12?'Early-session estimate only. Accumulate more trials before interpreting accuracy.':a>=.85?'Strong identification in this session. Next, use transfer mode and then no-feedback assessment.':a>=.65?'A developing sound–label mapping is visible. Keep the set stable until errors concentrate in only a few pitch classes, then broaden the set.':'The current set is still difficult. Reduce the pitch set and use immediate feedback before adding more variation.'}
+function protocol(){const t={guided:'Guided association: the pitch label stays visible while you hear it, emphasizing the initial sound–label link.',retrieval:'Randomized retrieval: identify each pitch before immediate corrective feedback. Difficult pitch classes can recur more often.',transfer:'Transfer: octave and timbre vary automatically to test whether learning generalizes beyond an exact training stimulus.',test:'Assessment: responses are recorded without trial-by-trial correctness feedback.'};$('protocolNote').textContent=t[$('mode').value];if($('mode').value==='transfer'){$('octave').checked=true;$('timbre').checked=true}}
+NOTES.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.className='note';b.textContent=n;b.addEventListener('click',()=>answer(i));$('noteButtons').appendChild(b)});
+$('newTone').addEventListener('click',newTrial);
+$('replay').addEventListener('click',()=>play(current));
+$('mode').addEventListener('change',protocol);
+$('setSize').addEventListener('change',()=>{current=null;answered=true;$('pitch').textContent='?';$('feedback').className='feedback small muted';$('feedback').textContent='Set changed. Tap Play new tone.';$('replay').disabled=true;updateButtons();updateMastery()});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&ctx&&ctx.state==='suspended'){$('audioState').textContent='Tap play';log('Safari suspended audio while page was inactive. Next direct tap will resume it.')}});
+protocol();updateButtons();updateStats();updateMastery();
+})();
+</script>
+</body>
+</html>
